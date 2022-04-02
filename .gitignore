@@ -1,0 +1,19 @@
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# token
+env
+.env
+
+
+# env
+discordbot
+.discordbot
+
+#items
+.cfg
+cfg
+
