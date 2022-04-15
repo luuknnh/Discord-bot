@@ -1,15 +1,22 @@
-import requests, yaml
+import requests, yaml, os
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
+zen = os.getenv('ZENQUOTES')
+queuetimes = os.getenv('QUEUETIMES')
+bored = os.getenv('BOREDAPI')
+
 
 def get_quote():
-    response = requests.get("https://zenquotes.io/api/random")
+    response = requests.get(zen)
     json_data = json.loads(response.text)
     quote = json_data[0]['q'] + "  - " + json_data[0]['a']
     return quote
 
 
 def get_wachttijd():
-    response = requests.get("https://queue-times.com/nl/parks/160/queue_times.json")
+    response = requests.get(queuetimes)
     formated_response = response.json()
 
     for i in formated_response['lands']:
@@ -26,5 +33,10 @@ def get_wachttijd():
             f.write(str(hihi))
             f.close()
     return hihi
-        
+
+def get_action():
+    response = requests.get(bored)
+    formated_response = response.json()
+    activity = formated_response['activity']
+    return activity
   
