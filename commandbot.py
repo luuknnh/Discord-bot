@@ -3,7 +3,7 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import commands
 
-from functions import get_quote
+from functions import get_quote, get_wachttijd
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -39,6 +39,24 @@ async def quote(ctx):
     """
     quote = get_quote() 
     await ctx.send(quote)
+    
+@bot.command()
+async def wachttijd(ctx):
+    """
+    Get attractions wachttijden Efteling
+    """
+    main = get_wachttijd()
+    print(main) 
+    await ctx.send(main)
+    
+    
+@bot.command()
+async def ping(ctx):
+    """
+    Send a random quote
+    """
+    
+    await ctx.send(f'Pong!')
      
      
      
