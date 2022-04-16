@@ -67,6 +67,34 @@ async def ping(ctx):
     await ctx.send(f'Pong!')
      
      
+@commands.has_permissions(manage_messages=True)
+@bot.command()
+async def poll(ctx, question, *options: str):
+    """
+    Make a Poll with 2 or 4 arguments
+    
+    Syntax = Yes or no question
+                [~poll "question" "option1" "option2"] 
+             4 options question
+                [~poll "question" "option1" "option2" "option3" "option4"]
+    """
+
+    if len(options) == 2 and options[0] == "yes" and options[1] == "no":
+        reactions = ['👍', '👎']
+    else:
+        reactions = ['1️⃣', '2️⃣', '3️⃣', '4️⃣' ]
+
+    description = []
+    for x, option in enumerate(options):
+        description += '\n {} {}'.format(reactions[x], option)
+
+    poll_embed = discord.Embed(title=question, color=3447003, description=''.join(description))
+
+    react_message = await ctx.send(embed=poll_embed)
+
+    for reaction in reactions[:len(options)]:
+        await react_message.add_reaction(reaction)
+     
      
      
 if __name__ == "__main__":
