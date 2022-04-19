@@ -25,12 +25,13 @@ async def punch(ctx, arg):
     
 @bot.command()
 async def info(ctx):
-    
+    """
+    Show current server, author and message id
+    """
     
     await ctx.send(ctx.guild)
     await ctx.send(ctx.author)
     await ctx.send(ctx.message.id)
-
 
 @bot.command()
 async def quote(ctx):
@@ -51,7 +52,7 @@ async def activity(ctx):
 @bot.command()
 async def wachttijd(ctx):
     """
-    Get attractions wachttijden Efteling
+    Get all waiting times Efteling Attractions
     """
     main = get_wachttijd()
     print(main) 
@@ -79,7 +80,7 @@ async def poll(ctx, question, *options: str):
                 [~poll "question" "option1" "option2" "option3" "option4"]
     """
 
-    if len(options) == 2 and options[0] == "yes" and options[1] == "no":
+    if len(options) == 2 and options[0] == "Yes" and options[1] == "No":
         reactions = ['👍', '👎']
     else:
         reactions = ['1️⃣', '2️⃣', '3️⃣', '4️⃣' ]
@@ -94,6 +95,31 @@ async def poll(ctx, question, *options: str):
 
     for reaction in reactions[:len(options)]:
         await react_message.add_reaction(reaction)
+        
+        
+# Meeting 
+@commands.has_permissions(manage_messages=True)
+@bot.command()
+async def meeting(ctx, title, description: str, image: str=""):
+    """
+    Confirm a meeting with 3 arguments
+    
+    Syntax = [~meeting "title" "description" "image"] 
+    """
+
+    meeting_embed = discord.Embed(title=title,
+                               color=3447003, 
+                               description=description)
+    
+    #set image for bot
+    meeting_embed.set_image(url=image)
+    
+    #set Footer for bot
+    meeting_embed.set_footer(text="Command invoked by {}".format(ctx.message.author.name))
+
+    await ctx.send(embed=meeting_embed)
+
+
      
      
      
