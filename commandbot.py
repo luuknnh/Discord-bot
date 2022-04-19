@@ -3,7 +3,7 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import commands
 
-from functions import get_action, get_quote, get_wachttijd
+from functions import get_action, get_quote, get_wachttijd_efteling_anderrijk, get_wachttijd_efteling_bosrijk, get_wachttijd_efteling_fantasierijk, get_wachttijd_efteling_marerijk, get_wachttijd_efteling_reizenrijk, get_wachttijd_efteling_ruigrijk
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -48,16 +48,62 @@ async def activity(ctx):
     """
     act = get_action() 
     await ctx.send(act)
+
     
 @bot.command()
-async def wachttijd(ctx):
+async def wachttijdanderrijk(ctx):
     """
-    Get all waiting times Efteling Attractions
+    Get all waiting times from Efteling Anderrijk
     """
-    main = get_wachttijd()
-    print(main) 
+    main = get_wachttijd_efteling_anderrijk()
+
     await ctx.send(main)
     
+@bot.command()
+async def wachttijdbosrijk(ctx):
+    """
+    Get all waiting times from Efteling Bosrijk
+    """
+    main = get_wachttijd_efteling_bosrijk()
+
+    await ctx.send(main)
+    
+@bot.command()
+async def wachttijdmarewijk(ctx):
+    """
+    Get all waiting times from Efteling Marewijk
+    """
+    main = get_wachttijd_efteling_marerijk()
+
+    await ctx.send(main)
+    
+@bot.command()
+async def wachttijdfantasierijk(ctx):
+    """
+    Get all waiting times from Fantasierrijk
+    """
+    main = get_wachttijd_efteling_fantasierijk()
+
+    await ctx.send(main)
+
+@bot.command()
+async def wachttijdreizenrijk(ctx):
+    """
+    Get all waiting times from Efteling Kezierrijk
+    """
+    main = get_wachttijd_efteling_reizenrijk()
+
+    await ctx.send(main)
+    
+
+@bot.command()
+async def wachttijdruigrijk(ctx):
+    """
+    Get all waiting times from Efteling Ruigrijk
+    """
+    main = get_wachttijd_efteling_ruigrijk()
+
+    await ctx.send(main)
     
 @bot.command()
 async def ping(ctx):

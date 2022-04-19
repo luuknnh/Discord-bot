@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 zen = os.getenv('ZENQUOTES')
-queuetimes = os.getenv('QUEUETIMES')
+queuetimestov = os.getenv('QUEUETIMESTOVERLAND')
+queuetimesefteling = os.getenv('QUEUETIMESEFTELING')
 bored = os.getenv('BOREDAPI')
 
 
@@ -15,24 +16,66 @@ def get_quote():
     return quote
 
 
-def get_wachttijd():
-    response = requests.get(queuetimes)
-    formated_response = response.json()
+def get_wachttijd_efteling_anderrijk():
 
-    for i in formated_response['lands']:
-        for x in i['rides']:
+    response = requests.get(queuetimesefteling)
+    formated_response = response.json()
+    x = formated_response['lands']
+    
+    for i in x:
+        if i['name'] == 'Anderrijk':
             
-            list = {
-            "Naam": x['name'], 
-            "Open": x['is_open'],
-            "Waiting Time": x['wait_time'],
-            }
-            print(list)
-            hihi = yaml.dump(list, allow_unicode=True)
-            f = open("demofile3.txt", "w") 
-            f.write(str(hihi))
-            f.close()
-    return hihi
+            return yaml.dump(i, allow_unicode=True)
+
+def get_wachttijd_efteling_bosrijk():
+
+    response = requests.get(queuetimesefteling)
+    formated_response = response.json()
+    x = formated_response['lands']
+
+    for i in x:
+        if i['name'] == 'Efteling Village Bosrijk':
+            return yaml.dump(i, allow_unicode=True)
+
+def get_wachttijd_efteling_fantasierijk():
+
+    response = requests.get(queuetimesefteling)
+    formated_response = response.json()
+    x = formated_response['lands']
+
+    for i in x:
+        if i['name'] == 'Fantasierijk':
+            return yaml.dump(i, allow_unicode=True)
+        
+def get_wachttijd_efteling_marerijk():
+
+    response = requests.get(queuetimesefteling)
+    formated_response = response.json()
+    x = formated_response['lands']
+
+    for i in x:
+        if i['name'] == 'Marerijk':
+            return yaml.dump(i, allow_unicode=True)
+
+def get_wachttijd_efteling_reizenrijk():
+
+    response = requests.get(queuetimesefteling)
+    formated_response = response.json()
+    x = formated_response['lands']
+
+    for i in x:
+        if i['name'] == 'Reizenrijk':
+            return yaml.dump(i, allow_unicode=True)
+        
+def get_wachttijd_efteling_ruigrijk():
+
+    response = requests.get(queuetimesefteling)
+    formated_response = response.json()
+    x = formated_response['lands']
+
+    for i in x:
+        if i['name'] == 'Ruigrijk':
+            return yaml.dump(i, allow_unicode=True)
 
 def get_action():
     response = requests.get(bored)
