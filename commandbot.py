@@ -44,7 +44,7 @@ async def quote(ctx):
 @bot.command()
 async def activity(ctx):
     """
-    Send a random quote
+    Get a random activity
     """
     act = get_action() 
     await ctx.send(act)
